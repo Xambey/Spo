@@ -1,0 +1,11 @@
+.*\(\s*(?<left>[a-zA-Z]{1}\w*|\d+)\s*(?<op>(<|>|==|<=|>=))\s*(?<right>[a-zA-Z]{1}\w*|\d+)\s*\).*
+
+.*(?<type>int|bool|double|float|long|ulong|uint|short)\s+(?<name>([a-zA-Z]\w*|\d+))(\;|\s*=\s*(?<value>[a-zA-Z]\w*|\d+))\;
+
+(?s)\{(?<body>.+)\}
+
+(?<left>[a-zA-Z]{1}\w*|\d+)\s*(?<op>\+|-|\/|\*|%)\s*(?<right>[a-zA-Z]{1}\w*|\d+)\s*
+
+\s*(?<left>[a-zA-Z]\w*|\d+)\s*=\s*(?<right>.*\b)\;
+
+\s*(while|if|for)\s*\((?<condition>.+)\)

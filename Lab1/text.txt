@@ -1,0 +1,8 @@
+int a = 54;
+
+while(a <= 234 ){
+	int b = a + 100;
+	a = b + a;
+	a = a *a;
+	if (a < 0) {a++;}
+}
