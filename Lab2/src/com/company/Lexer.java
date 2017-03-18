@@ -58,7 +58,7 @@ public class Lexer {
     }
 
     public List<Token> Parse(String Path) throws IOException {
-        if (Path.isEmpty())
+        if (Path.isEmpty() || lexems.isEmpty())
             return null;
         List<Token> tokens = new ArrayList<Token>();
         String list = Files.readAllLines(Paths.get(Path)).toString();
