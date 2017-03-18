@@ -5,16 +5,13 @@
  */
 package com.company;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -23,11 +20,9 @@ import java.util.stream.Collectors;
  */
 public class Lexer {
     private Set<Lexem> lexems;
-    private List<String> data;
     private List<Token> tokens;
     
-    public Lexer(String path) throws IOException{
-         data = Files.readAllLines(Paths.get(path));
+    public Lexer() throws IOException{
          InitialLexems();
     }
 
@@ -40,6 +35,20 @@ public class Lexer {
         lexems.add(new Lexem("OPERATION",2,"^(-|\\+|>|<|\\*|\\/|>=|<=)$"));
     }
 
+    public void AddLexem(String name, int priority, String pattern){
+        if(lexems == null)
+            lexems = new HashSet<Lexem>();
+        lexems.add(new Lexem(name,priority,pattern));
+    }
+
+    public void ShowMatches(List<Token> tokens){
+        if(tokens.isEmpty())
+            return;
+        for(Token item: tokens){
+            System.out.println(item.toString());
+        }
+    }
+
     public void ShowMatches(){
         if(tokens.isEmpty())
             return;
@@ -48,42 +57,36 @@ public class Lexer {
         }
     }
 
-    public void ShowText(){
-        if(tokens.isEmpty())
-            return;
-        for(String item: data){
-            System.out.println(item);
-        }
-    }
-
-    public void Parse() {
-        tokens = new ArrayList<>();
-        if (data.isEmpty())
-            return;
-        String list = data.toString();
+    public List<Token> Parse(String Path) throws IOException {
+        if (Path.isEmpty())
+            return null;
+        List<Token> tokens = new ArrayList<Token>();
+        String list = Files.readAllLines(Paths.get(Path)).toString();
 
         int i = 0;
         List<Lexem> current;
         List<Lexem> prev;
 
-        while(i < list.length()){
+        while (i < list.length()) {
             current = new ArrayList<Lexem>();
             prev = new ArrayList<Lexem>();
 
             int j = 0;
-            while(j < list.length() && (j == 0 || !current.isEmpty())){
+            while (j < list.length() && (j == 0 || !current.isEmpty())) {
                 prev = current;
-                String str = list.substring(i,i + j + 1);
+                String str = list.substring(i, i + j + 1);
                 current = FindLexem(str);
                 j++;
             }
 
-            if(!prev.isEmpty() && current.isEmpty()){
-                prev.sort((a,b) -> Integer.compare(a.getPriority(),b.getPriority()));
+            if (!prev.isEmpty() && current.isEmpty()) {
+                prev.sort((a, b) -> Integer.compare(a.getPriority(), b.getPriority()));
                 tokens.add(new Token(prev.get(0), list.substring(i, --j + i)));
             }
             i += j;
         }
+        this.tokens = tokens;
+        return tokens;
     }
 
     private List<Lexem> FindLexem(String text){
