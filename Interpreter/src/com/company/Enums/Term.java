@@ -1,0 +1,27 @@
+package com.company.Enums;
+
+public enum Term {
+    VAR_TYPE,
+    NAME,
+    DIGIT,
+    NATURAL_DIGIT,
+    BOOLEAN,
+    ASSIGN_OP,
+    UNARY_OP,
+    CONDITION_OP,
+    BINARY_OP,
+    RETURN,
+    OPENING_BRACKET,
+    CLOSING_BRACKET,
+    OPENING_BODY,
+    CLOSING_BODY,
+    LINE_END,
+    COMMA,
+    IF,
+    ELSE,
+    FOR,
+    WHILE,
+    COMMENT,
+    COMMENT_START,
+    COMMENT_END,
+}
