@@ -1,5 +1,25 @@
-﻿int a = 54;
-while(a <= 234 ) {
-	int b = a + 100;
-	a = b + a;
+﻿int main()
+{
+	int a = 54;
+	while(a <= 234 ) {
+		if(a < 234){
+			int b = a + 100;
+			a = b + a;
+		}
+	}
+	a = 5;
+	print(factorial(5));
+	
+	return 0;
+}
+
+int factorial(int n)
+{
+	if(n == 1 || n == 0)
+		return 1;
+	int res = 1;
+	for(int i = 1; i <= n; i++) {
+		res *= i;
+	}
+	return res;
 }

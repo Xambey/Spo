@@ -24,7 +24,8 @@ public class Main {
         Lexer lexer = new Lexer();
         List<Token> tokens = lexer.GetTokens(list);
 
+        System.out.println("Tokens list: ");
         for(Token item : tokens)
-            System.out.printf(item.toString() + "\n");
+            System.out.println(item.toString());
     }
 }
