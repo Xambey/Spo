@@ -2,13 +2,24 @@ package com.company.ProgramThree;
 
 import java.util.List;
 
-public abstract class Node {
+public class Node {
     protected List<Node> children;
     protected int level;
 
     public Node(){ this.level = 0; }
     public Node(int level) { this.level = level; }
-
+    public int GetLevel()
+    {
+        return level;
+    }
+    public List<Node> GetChildren()
+    {
+        return children;
+    }
+    public void AddChild(Node node)
+    {
+        children.add(node);
+    }
     private StringBuilder TextGenerator(int level)
     {
         StringBuilder sb = new StringBuilder();
@@ -17,8 +28,7 @@ public abstract class Node {
         sb.append(System.lineSeparator());
         return sb;
     }
-
-    protected String toString(int level)
+    public String toString(int level)
     {
         return TextGenerator(level).toString();
     }

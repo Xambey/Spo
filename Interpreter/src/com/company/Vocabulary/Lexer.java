@@ -34,7 +34,7 @@ public class Lexer {
         AddLexeme("^/\\*$",1,Term.COMMENT_START);
         AddLexeme("^\\*/$",1,Term.COMMENT_END);
         AddLexeme("^//$",1,Term.COMMENT);
-        AddLexeme("^(int|double|float|double|char|string|short|long|ulong|uint|bool|void)$",2,Term.VAR_TYPE);
+        AddLexeme("^(int|double|float|char|string|short|long|ulong|uint|bool|void)$",2,Term.VAR_TYPE);
         AddLexeme("^if$",3,Term.IF);
         AddLexeme("^else$",3,Term.ELSE);
         AddLexeme("^for$",4,Term.FOR);
@@ -73,7 +73,7 @@ public class Lexer {
             List<Lexeme> newList = new ArrayList<>();
             List<Lexeme> oldList = new ArrayList<>();
 
-            int j;
+            int j; //while(a > 6)
             for(j = 0; j + i < text.length() && (!newList.isEmpty() || j == 0); j++) {
                 oldList = newList;
                 newList = SearchMatch(text.substring(i,i + j + 1));

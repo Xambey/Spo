@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.Exceptions.SyntaxBuilderException;
+import com.company.Parsing.Parser;
 import com.company.Tokens.Token;
 import com.company.Vocabulary.Lexer;
 import com.sun.deploy.util.StringUtils;
@@ -12,7 +14,7 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SyntaxBuilderException {
         String filename = "text.txt";
         Path path = Paths.get(filename);
         if(Files.notExists(path)) {
@@ -27,5 +29,10 @@ public class Main {
         System.out.println("Tokens list: ");
         for(Token item : tokens)
             System.out.println(item.toString());
+        System.out.println();
+
+        Parser parser = new Parser();
+        parser.Parse(tokens);
+
     }
 }

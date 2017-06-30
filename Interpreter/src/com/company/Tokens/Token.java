@@ -14,5 +14,5 @@ public class Token {
     public Lexeme GetLexeme(){ return lexeme; }
     public String GetMatch(){ return value; }
     @Override
-    public String toString() { return String.format("Match: %s Lexeme: %s }",value,lexeme.toString()); }
+    public String toString() { return String.format("Match: %s Lexeme: %s ",value,lexeme.toString()); }
 }

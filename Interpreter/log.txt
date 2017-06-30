@@ -1,0 +1,262 @@
+Source:
+void main()
+{
+    print((2+4)*10);
+
+    print(pow(2, 10));
+    print(pow_rec(2, 10));
+
+    foo2(15 - 1, 2);
+}
+
+int pow(int x, int s)
+{
+    int r = x;
+    while(s > 1)
+    {
+        x *= r;
+        s--;
+    }
+
+    return x;
+}
+
+int pow_rec(int x, int s)
+{
+    if(s == 1)
+    {
+        return x;
+    }
+
+    return x * pow_rec(x, s - 1);
+}
+
+void foo2(int b, int f)
+{
+    int h = b + 2;
+    print(h*f);
+}
+
+Lexer:
+VAR_TYPE void
+AME main
+BRACED_OPEN (
+BRACED_CLOSE )
+BODY_OPEN {
+NAME print
+BRACED_OPEN (
+BRACED_OPEN (
+DIGIT 2
+MATH_OP +
+DIGIT 4
+BRACED_CLOSE )
+MATH_OP *
+DIGIT 10
+BRACED_CLOSE )
+LINE_END ;
+NAME print
+BRACED_OPEN (
+NAME pow
+BRACED_OPEN (
+DIGIT 2
+COMMA ,
+DIGIT 10
+BRACED_CLOSE )
+BRACED_CLOSE )
+LINE_END ;
+NAME print
+BRACED_OPEN (
+NAME pow_rec
+BRACED_OPEN (
+DIGIT 2
+COMMA ,
+DIGIT 10
+BRACED_CLOSE )
+BRACED_CLOSE )
+LINE_END ;
+
+NAME foo2
+BRACED_OPEN (
+DIGIT 15
+[99-100] MATH_OP -
+DIGIT 1
+COMMA ,
+DIGIT 2
+BRACED_CLOSE )
+LINE_END ;
+
+BODY_CLOSE }
+VAR_TYPE int
+NAME pow
+BRACED_OPEN (
+VAR_TYPE int
+NAME x
+COMMA ,
+VAR_TYPE int
+NAME s
+BRACED_CLOSE )
+BODY_OPEN {
+VAR_TYPE int
+NAME r
+ASSIGN_OP =
+NAME x
+LINE_END ;
+WHILE_OP while
+BRACED_OPEN (
+NAME s
+CONDITION_OP >
+DIGIT 1
+BRACED_CLOSE )
+BODY_OPEN {
+NAME x
+ASSIGN_OP *=
+NAME r
+LINE_END ;
+NAME s
+UNAR_OP --
+LINE_END ;
+BODY_CLOSE }
+RETURN return
+NAME x
+LINE_END ;
+BODY_CLOSE }
+VAR_TYPE int
+NAME pow_rec
+BRACED_OPEN (
+VAR_TYPE int
+NAME x
+COMMA ,
+VAR_TYPE int
+NAME s
+BRACED_CLOSE )
+BODY_OPEN {
+IF_OF if
+BRACED_OPEN (
+NAME s
+CONDITION_OP ==
+DIGIT 1
+BRACED_CLOSE )
+BODY_OPEN {
+RETURN return
+NAME x
+LINE_END ;
+BODY_CLOSE }
+RETURN return
+NAME x
+MATH_OP *
+NAME pow_rec
+BRACED_OPEN (
+NAME x
+COMMA ,
+NAME s
+MATH_OP -
+DIGIT 1
+BRACED_CLOSE )
+LINE_END ;
+BODY_CLOSE }
+VAR_TYPE void
+NAME foo2
+BRACED_OPEN (
+VAR_TYPE int
+NAME b
+COMMA ,
+VAR_TYPE int
+NAME f
+BRACED_CLOSE )
+BODY_OPEN {
+VAR_TYPE int
+NAME h
+ASSIGN_OP =
+NAME b
+MATH_OP +
+DIGIT 2
+LINE_END ;
+NAME print
+BRACED_OPEN (
+NAME h
+MATH_OP *
+NAME f
+BRACED_CLOSE )
+LINE_END ;
+BODY_CLOSE }
+
+Parcer:
+RootBodyNode
+	MethodNode Name: main Type: void
+		CallNode
+			ValueBodyNode
+				ValueBodyNode
+					ConstantNode Value: 2 Type: DIGIT
+					MathOperationNode '+'
+					ConstantNode Value: 4 Type: DIGIT
+				MathOperationNode '*'
+				ConstantNode Value: 10 Type: DIGIT
+		CallNode
+			ValueBodyNode
+				CallNode
+					ValueBodyNode
+						ConstantNode Value: 2 Type: DIGIT
+					ValueBodyNode
+						ConstantNode Value: 10 Type: DIGIT
+		CallNode
+			ValueBodyNode
+				CallNode
+					ValueBodyNode
+						ConstantNode Value: 2 Type: DIGIT
+					ValueBodyNode
+						ConstantNode Value: 10 Type: DIGIT
+		CallNode
+			ValueBodyNode
+				ConstantNode Value: 15 Type: DIGIT
+				MathOperationNode '-'
+				ConstantNode Value: 1 Type: DIGIT
+			ValueBodyNode
+				ConstantNode Value: 2 Type: DIGIT
+	MethodNode Name: pow Type: int
+		VarDefineNode Name: r Type: int
+		AssignNode Variable: r
+			VarNameNode Name: x
+		WhileNode
+			ConditionNode
+		Then
+			AssignNode Variable: x
+				VarNameNode Name: x
+				MathOperationNode '*'
+				ValueBodyNode
+					VarNameNode Name: r
+			VarUnarNode Name: s Operator: --
+		ReturnNode
+			VarNameNode Name: x
+	MethodNode Name: pow_rec Type: int
+		BranchNode
+			ConditionNode
+		Then
+			ReturnNode
+				VarNameNode Name: x
+		ReturnNode
+			VarNameNode Name: x
+			MathOperationNode '*'
+			CallNode
+				ValueBodyNode
+					VarNameNode Name: x
+				ValueBodyNode
+					VarNameNode Name: s
+					MathOperationNode '-'
+					ConstantNode Value: 1 Type: DIGIT
+	MethodNode Name: foo2 Type: void
+		VarDefineNode Name: h Type: int
+		AssignNode Variable: h
+			VarNameNode Name: b
+			MathOperationNode '+'
+			ConstantNode Value: 2 Type: DIGIT
+		CallNode
+			ValueBodyNode
+				VarNameNode Name: h
+				MathOperationNode '*'
+				VarNameNode Name: f
+
+60
+1024
+1024
+32
+
